@@ -6,7 +6,7 @@ sap.ui.define([
     return BaseController.extend("com.wip2.project1.controller.App", {
 
         onInit : function () {
-            // Abhishek
+            // am
             // apply content density mode to root view
             // Adding comments
             // suman
