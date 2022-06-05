@@ -7,6 +7,7 @@ sap.ui.define([
 
         onInit : function () {
             // apply content density mode to root view
+            // Adding comments
             this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
         }
     });
