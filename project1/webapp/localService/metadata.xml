@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="YY1_WIPENTRIES_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="P_Scbo_UserType" sap:label="User" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="name"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="User" sap:quickinfo="User Name in User Master Record"/>
+                <Property Name="description" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="Description of the Technical User Account"/>
+            </EntityType>
+            <EntityType Name="YY1_WIPENTRIESType" sap:label="WIPEntries" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SAP_UUID"/>
+                </Key>
+                <Property Name="SAP_UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="TimeEntryID" Type="Edm.String" MaxLength="10" sap:label="TimeEntryID"/>
+                <Property Name="JournalEntryID" Type="Edm.String" MaxLength="10" sap:label="JournalEntryID"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="60" sap:label="Description"/>
+                <Property Name="Type" Type="Edm.String" MaxLength="2" sap:text="Type_Text" sap:label="Type" sap:value-list="standard"/>
+                <Property Name="Type_Text" Type="Edm.String" MaxLength="60" sap:label="Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="PostingDate"/>
+                <Property Name="DocumentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="DocumentDate"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="Quantity"/>
+                <Property Name="Units" Type="Edm.String" MaxLength="3" sap:label="Units"/>
+                <Property Name="BasePrice" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="BasePrice"/>
+                <Property Name="NetAmount" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="NetAmount"/>
+                <Property Name="Notes" Type="Edm.String" MaxLength="500" sap:label="Notes"/>
+                <Property Name="SAP_CreatedDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SAP_CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="SAP_CreatedByUser_Text" sap:label="Created By" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SAP_CreatedByUser_Text" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="Description of the Technical User Account" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SAP_LastChangedDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Last Changed On" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SAP_LastChangedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="SAP_LastChangedByUser_Text" sap:label="Last Changed By" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SAP_LastChangedByUser_Text" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="Description of the Technical User Account" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="to_SAPSysAdminDataChangeUser" Relationship="YY1_WIPENTRIES_CDS.assoc_46A395CEC08A1E7940BD957A5CDCCC89" FromRole="FromRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89" ToRole="ToRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89"/>
+                <NavigationProperty Name="to_SAPSysAdminDataCreateUser" Relationship="YY1_WIPENTRIES_CDS.assoc_1F723A56F6002A0EAC358AA77C29200C" FromRole="FromRole_assoc_1F723A56F6002A0EAC358AA77C29200C" ToRole="ToRole_assoc_1F723A56F6002A0EAC358AA77C29200C"/>
+                <NavigationProperty Name="to_Type" Relationship="YY1_WIPENTRIES_CDS.assoc_889C8832E40B34F14B3C132D61E0925F" FromRole="FromRole_assoc_889C8832E40B34F14B3C132D61E0925F" ToRole="ToRole_assoc_889C8832E40B34F14B3C132D61E0925F"/>
+            </EntityType>
+            <EntityType Name="YY1_WIPTYPEType" sap:label="WIPType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="Description" sap:label="Code"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="60" sap:label="Description"/>
+            </EntityType>
+            <Association Name="assoc_1F723A56F6002A0EAC358AA77C29200C" sap:content-version="1">
+                <End Type="YY1_WIPENTRIES_CDS.YY1_WIPENTRIESType" Multiplicity="1" Role="FromRole_assoc_1F723A56F6002A0EAC358AA77C29200C"/>
+                <End Type="YY1_WIPENTRIES_CDS.P_Scbo_UserType" Multiplicity="0..1" Role="ToRole_assoc_1F723A56F6002A0EAC358AA77C29200C"/>
+            </Association>
+            <Association Name="assoc_889C8832E40B34F14B3C132D61E0925F" sap:content-version="1">
+                <End Type="YY1_WIPENTRIES_CDS.YY1_WIPENTRIESType" Multiplicity="1" Role="FromRole_assoc_889C8832E40B34F14B3C132D61E0925F"/>
+                <End Type="YY1_WIPENTRIES_CDS.YY1_WIPTYPEType" Multiplicity="0..1" Role="ToRole_assoc_889C8832E40B34F14B3C132D61E0925F"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_889C8832E40B34F14B3C132D61E0925F">
+                        <PropertyRef Name="Code"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_889C8832E40B34F14B3C132D61E0925F">
+                        <PropertyRef Name="Type"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_46A395CEC08A1E7940BD957A5CDCCC89" sap:content-version="1">
+                <End Type="YY1_WIPENTRIES_CDS.YY1_WIPENTRIESType" Multiplicity="1" Role="FromRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89"/>
+                <End Type="YY1_WIPENTRIES_CDS.P_Scbo_UserType" Multiplicity="0..1" Role="ToRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89"/>
+            </Association>
+            <EntityContainer Name="YY1_WIPENTRIES_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="P_Scbo_User" EntityType="YY1_WIPENTRIES_CDS.P_Scbo_UserType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="YY1_WIPENTRIES" EntityType="YY1_WIPENTRIES_CDS.YY1_WIPENTRIESType" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="YY1_WIPTYPE" EntityType="YY1_WIPENTRIES_CDS.YY1_WIPTYPEType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_889C8832E40B34F14B3C132D61E0925F" Association="YY1_WIPENTRIES_CDS.assoc_889C8832E40B34F14B3C132D61E0925F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="YY1_WIPENTRIES" Role="FromRole_assoc_889C8832E40B34F14B3C132D61E0925F"/>
+                    <End EntitySet="YY1_WIPTYPE" Role="ToRole_assoc_889C8832E40B34F14B3C132D61E0925F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_1F723A56F6002A0EAC358AA77C29200C" Association="YY1_WIPENTRIES_CDS.assoc_1F723A56F6002A0EAC358AA77C29200C" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="YY1_WIPENTRIES" Role="FromRole_assoc_1F723A56F6002A0EAC358AA77C29200C"/>
+                    <End EntitySet="P_Scbo_User" Role="ToRole_assoc_1F723A56F6002A0EAC358AA77C29200C"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_46A395CEC08A1E7940BD957A5CDCCC89" Association="YY1_WIPENTRIES_CDS.assoc_46A395CEC08A1E7940BD957A5CDCCC89" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="YY1_WIPENTRIES" Role="FromRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89"/>
+                    <End EntitySet="P_Scbo_User" Role="ToRole_assoc_46A395CEC08A1E7940BD957A5CDCCC89"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="YY1_WIPENTRIES_CDS.YY1_WIPENTRIESType/Type" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="WIPType"/>
+                        <PropertyValue Property="CollectionPath" String="YY1_WIPTYPE"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Type"/>
+                                    <PropertyValue Property="ValueListProperty" String="Code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Description"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="YY1_WIPENTRIES_CDS.YY1_WIPENTRIES_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="YY1_WIPENTRIES_CDS.YY1_WIPENTRIES_CDS_Entities/YY1_WIPENTRIES" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_SAPSysAdminDataChangeUser"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_SAPSysAdminDataCreateUser"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Type"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/sap/YY1_WIPENTRIES_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my304609-api.s4hana.ondemand.com/sap/opu/odata/sap/YY1_WIPENTRIES_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
