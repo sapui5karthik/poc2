@@ -1,4 +1,4 @@
-sap.ui.define([], function () {
+sap.ui.define(["sap/ui/core/format/DateFormat"], function (DateFormat) {
     "use strict";
 
     return {
@@ -14,7 +14,39 @@ sap.ui.define([], function () {
                 return "";
             }
             return parseFloat(sValue).toFixed(2);
-        }
+        },
+        dateDisplay: function(d3) {
+
+			if (!d3 || d3 === undefined) {
+				return "";
+			}
+			var oDateFormat = DateFormat.getDateInstance({
+				scale: "medium",
+				pattern: "MM/dd/yyyy"
+
+			});
+			var finaldate = oDateFormat.format(new Date(d3));
+
+			return finaldate;
+
+		},
+        dateTimebackendwithtime: function(date) {
+			//2021-03-02:T00:00:00
+			if (date !== undefined) {
+
+				var oDateFormat = DateFormat.getDateInstance({
+					scale: "medium",
+
+					pattern: "yyyy-MM-dd"
+				});
+				var subFromDate = oDateFormat.format(new Date(date));
+
+				return subFromDate + "T00:00:00";
+			} else {
+				return "";
+			}
+
+		},
 
     };
 

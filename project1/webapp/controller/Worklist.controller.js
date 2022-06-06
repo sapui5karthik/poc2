@@ -3,8 +3,10 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator,MessageToast,MessageBox) {
     "use strict";
 
     return BaseController.extend("com.wip2.project1.controller.Worklist", {
@@ -14,12 +16,331 @@ sap.ui.define([
         /* =========================================================== */
         /* lifecycle methods                                           */
         /* =========================================================== */
+        onInit : function(){
+            if(this.byId("timeentrysearch").getValue() !== ""){
+                this.byId("timeentrysearch").setValue();
+            }
+            if(this.byId("descsearch").getValue() !== ""){
+                this.byId("descsearch").setValue();
+            }
+            
+            if(this.byId("postdate").getValue() !== ""){
+                this.byId("postdate").setValue();
+            }
+            if(this.byId("jrnlentry").getValue() !== ""){
+                this.byId("jrnlentry").setValue();
+            }
+            if(this.byId("docdate").getValue() !== ""){
+                this.byId("docdate").setValue();
+            }
+            if(this.byId("typesearch").getValue() !== ""){
+                this.byId("typesearch").setValue();
+            }
+            sap.ui.core.BusyIndicator.show(0);
+            var omodelwipread = this.getOwnerComponent().getModel();
+           
+            omodelwipread.read("/YY1_WIPENTRIES",{
+              
+                success : function(odata){
+                 
+                    var jsonmodel = new JSONModel();
+                    jsonmodel.setData(odata.results);
+                   
+                    this.getView().byId("table").setModel(jsonmodel,"wip");
+                    
+                    sap.ui.core.BusyIndicator.hide();
+                }.bind(this),
+                error : function(msg){
+                    sap.ui.core.BusyIndicator.hide();
 
+                }
+            });
+        },
+          // CUSTOM CODE : Developer: Suman Venkatapuram for Chappota.com
+        onBeforeRebindTable: function (oEvent) {
+			// var mBindingParams = oEvent.getParameter("bindingParams");
+			// var oMultiComboBox = this.getView().byId("multiComboBox");
+			// var aCountKeys = oMultiComboBox.getSelectedKeys();
+			// for (var i = 0; i < aCountKeys.length; i++) {
+			// 	var newFilter = new Filter("Count", FilterOperator.EQ, aCountKeys[i]);
+			// 	if (aCountKeys.length > 0) {
+			// 		mBindingParams.filters.push(newFilter);
+			// 	}
+			// }
+		},
+		onAfterVariantLoad: function(oEvent) {
+			if (this._smartFilterBar) {
+
+				var oData = this._smartFilterBar.getFilterData();
+				var oCustomFieldData = oData["_CUSTOM"];
+				// if (oCustomFieldData) {
+
+				// 	var oCtrl = this.getView().byId("multiComboBox");
+
+				// 	if (oCtrl) {
+				// 		oCtrl.setSelectedKeys(oCustomFieldData.MyOwnFilterField);
+				// 	}
+				// }
+			}
+		},
+
+		onBeforeVariantSave: function(oEvent) {
+			this._updateCustomFilter();
+		},
+
+		onBeforeVariantFetch: function() {
+			this._updateCustomFilter();
+		},
+        _updateCustomFilter: function() {
+			// if (this._smartFilterBar) {
+
+			// 	var oCtrl = this.getView().byId("multiComboBox");
+
+			// 	if (oCtrl) {
+			// 		this._smartFilterBar.setFilterData({
+			// 			_CUSTOM: {
+			// 				MyOwnFilterField: oCtrl.getSelectedKeys()
+			// 			}
+			// 		});
+			// 	}
+			// }
+		},
+ reusablecreateupdate : function(){
+                //com.chappota.wipprojectsalesreport
+                sap.ui.core.BusyIndicator.show(0);
+                if(!this.cufrag){
+                    this.cufrag = sap.ui.xmlfragment(this.getView().getId(),"com.chappota.wipprojectsalesreport.fragments.Create",this);
+                    this.getView().addDependent(this.cufrag);
+                }
+                
+                var omodelwipread = this.getOwnerComponent().getModel();
+                omodelwipread.read("/YY1_WIPENTRIES",{
+                    success : function(odata){
+                        debugger;
+                        this.cufrag.open();
+                        for(var i=0;i<odata.results.length;++i){
+                            var timeentry = parseInt(odata.results[i].TimeEntryID);
+                           
+
+                            var jrnlentryid = parseInt(odata.results[i].JournalEntryID);
+                            
+
+                            
+                        }
+                        this.byId("in_timeentry").setValue(timeentry+1);
+                        this.byId("in_jrnlid").setValue(jrnlentryid+1);
+                        sap.ui.core.BusyIndicator.hide();
+                    }.bind(this),
+                    error : function(msg){
+                        sap.ui.core.BusyIndicator.hide();
+
+                    }
+                });
+        },
+        _CloseCUFrag : function(){
+            this.cufrag.close();
+        },
+
+        // Create new record
+        _createpress : function(oevent){
+            
+            //oevent.getParameter("pressed");
+            this.reusablecreateupdate();
+        },
+        _editpress : function(oevent){
+            
+            var radiosel = this.byId("updaterad");
+            let state = oevent.getParameter("pressed");
+            if(state){
+                this.byId("idseledit").setVisible(true);
+            }
+            if(!state){
+                this.byId("idseledit").setVisible(false);
+            }
+        },
+        _deletepress : function(oevent){
+            let state = oevent.getParameter("pressed");
+            if(state){
+                this.byId("idseldel").setVisible(true);
+            }
+            if(!state){
+                this.byId("idseldel").setVisible(false);
+            }
+        },
+        _rowedit : function(oevent){
+            if(oevent.getParameter("selected")){
+                if(!this.ufrag){
+                    this.ufrag = sap.ui.xmlfragment(this.getView().getId(),"com.chappota.wipprojectsalesreport.fragments.Update",this);
+                    this.getView().addDependent(this.ufrag);
+                }
+                this.ufrag.open();
+
+                var bc = oevent.getSource().getBindingContext("wip").getProperty("");
+                debugger;
+                
+                this.byId("id_uuid1").setValue(bc.SAP_UUID);
+                this.byId("in_timeentry1").setValue(bc.TimeEntryID);
+                this.byId("in_jrnlid1").setValue(bc.JournalEntryID);
+                this.byId("in_desc1").setValue(bc.Description);
+                this.byId("in_type1").setValue(bc.Type);
+                this.byId("in_pd1").setValue(this.formatter.dateDisplay(bc.PostingDate));
+                this.byId("in_dd1").setValue(this.formatter.dateDisplay(bc.DocumentDate));
+                this.byId("in_qlty1").setValue(bc.Quantity);
+                this.byId("in_units1").setValue(bc.Units);
+                this.byId("in_bp1").setValue(bc.BasePrice);
+                this.byId("in_netamnt1").setValue(bc.NetAmount);
+                this.byId("in_notes1").setValue(bc.Notes);
+
+
+            }
+        },
+        _saverecord : function(){
+           sap.ui.core.BusyIndicator.show(0);
+            var payload = {
+                "TimeEntryID" : this.byId("in_timeentry").getValue(),
+                "JournalEntryID" : this.byId("in_jrnlid").getValue(),
+                "Description" : this.byId("in_desc").getValue(),
+                "Type" : this.byId("in_type").getValue(),
+                "PostingDate" : this.formatter.dateTimebackendwithtime(this.byId("in_pd").getValue()),
+                "DocumentDate" :  this.formatter.dateTimebackendwithtime(this.byId("in_dd").getValue()),
+                "Quantity" : this.byId("in_qlty").getValue(),
+                "Units" : this.byId("in_units").getValue(),
+                "BasePrice" : this.byId("in_bp").getValue(),
+                "NetAmount" : this.byId("in_netamnt").getValue(),
+                "Notes" : this.byId("in_notes").getValue(),
+            };
+            var omodelcreate = this.getOwnerComponent().getModel();
+            omodelcreate.create("/YY1_WIPENTRIES",payload,{
+                success : function(odata){
+                    sap.ui.core.BusyIndicator.hide();
+                    debugger;
+                     this.cufrag.close();
+            MessageToast.show("Record Created");
+            this.onInit();
+                }.bind(this),
+                error : function(msg){
+                    debugger;
+                    sap.ui.core.BusyIndicator.hide();
+                }
+            });
+        },
+        _updaterecord : function(){
+           
+           sap.ui.core.BusyIndicator.show(0);
+           var SAP_UUID = this.byId("id_uuid1").getValue();
+            var payload = {
+                
+                "TimeEntryID" : this.byId("in_timeentry1").getValue(),
+                "JournalEntryID" : this.byId("in_jrnlid1").getValue(),
+                "Description" : this.byId("in_desc1").getValue(),
+                "Type" : this.byId("in_type1").getValue(),
+                "PostingDate" : this.formatter.dateTimebackendwithtime(this.byId("in_pd1").getValue()),
+                "DocumentDate" :  this.formatter.dateTimebackendwithtime(this.byId("in_dd1").getValue()),
+                "Quantity" : this.byId("in_qlty1").getValue(),
+                "Units" : this.byId("in_units1").getValue(),
+                "BasePrice" : this.byId("in_bp1").getValue(),
+                "NetAmount" : this.byId("in_netamnt1").getValue(),
+                "Notes" : this.byId("in_notes1").getValue(),
+            };
+           var omodelupdate = this.getOwnerComponent().getModel();
+           var eset = "/YY1_WIPENTRIES(guid'"+SAP_UUID+"')";
+           omodelupdate.update(eset,payload,{
+               success : function(odata){
+                   sap.ui.core.BusyIndicator.hide();
+                   debugger;
+                   this.ufrag.close();
+           MessageToast.show("Record updated");
+           this.onInit();
+               }.bind(this),
+               error : function(msg){
+                   debugger;
+                   sap.ui.core.BusyIndicator.hide();
+               }
+           });
+
+        },
+        _CloseUFrag: function(){
+            this.ufrag.close();
+        },
+        _deleterecord : function(oevent){
+            var SAP_UUID = oevent.getSource().getBindingContext("wip").getProperty("SAP_UUID");
+			
+            sap.m.MessageBox.confirm("Please confirm to delete the draft. Once deleted, it cannot be retrieved.", {
+                    
+                        onClose: function(oAction) {
+                        if(oAction === MessageBox.Action.OK){
+            var data_del = this.getOwnerComponent().getModel();
+           
+                var eset = "/YY1_WIPENTRIES(guid'" + SAP_UUID + "')";
+                data_del.remove(eset, null,
+                function() {
+                    debugger;
+                    this.onInit();
+                	MessageToast.show("Delete success");
+                }.bind(this),
+                function() {
+                    debugger;
+                	MessageToast.show("Delete failed");
+                }
+
+            );
+                        }
+                        }.bind(this)
+                    });
+        },
+
+        //filters
+        _localmethodforfilters : function(filters){
+            debugger;
+            var omodelwipread = this.getOwnerComponent().getModel();
+           // var filters = new Filter(filter1key,FilterOperator.EQ,filtervalue);
+            omodelwipread.read("/YY1_WIPENTRIES",{
+                filters : [filters],
+                success : function(odata){
+                    debugger;
+                    var jsonmodel = new JSONModel();
+                    jsonmodel.setData(odata.results);
+                   
+                    this.getView().byId("table").setModel(jsonmodel,"wip");
+                    
+                    sap.ui.core.BusyIndicator.hide();
+                }.bind(this),
+                error : function(msg){
+                    sap.ui.core.BusyIndicator.hide();
+
+                }
+            });
+        },
+        _timeentrysearch : function(oevent){
+            var filters = new Filter("TimeEntryID",FilterOperator.EQ,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
+        _descsearch : function(oevent){
+            var filters = new Filter("Description",FilterOperator.Contains,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
+        _postdate: function(oevent){
+            var filters = new Filter("PostingDate",FilterOperator.EQ,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
+
+        _journalentrysearch: function(oevent){
+            var filters = new Filter("JournalEntryID",FilterOperator.EQ,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
+        _docdate: function(oevent){
+            var filters = new Filter("DocumentDate",FilterOperator.EQ,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
+        _typesearch : function(oevent){
+            var filters = new Filter("Type",FilterOperator.EQ,oevent.getParameter("value"));
+            this._localmethodforfilters(filters);
+        },
         /**
          * Called when the worklist controller is instantiated.
          * @public
          */
-        onInit : function () {
+        _onInit : function () {
             var oViewModel;
 
             // keeps the search state
@@ -71,9 +392,26 @@ sap.ui.define([
          */
         onPress : function (oEvent) {
             // The source is the list item that got pressed
-            this._showObject(oEvent.getSource());
+           // this._showObject(oEvent.getSource());
+            var uuid1 = oEvent.getSource().getBindingContext("wip").getProperty("SAP_UUID");
+      
+            this.getRouter().navTo("object", {
+                from: "worklist",
+                to: "object",
+                uuid : uuid1
+            });
         },
-
+        onPresssmarttable : function (oEvent) {
+            // The source is the list item that got pressed
+           // this._showObject(oEvent.getSource());
+            var uuid1 = oEvent.getSource().getBindingContext().getProperty("SAP_UUID");
+      
+            this.getRouter().navTo("object", {
+                from: "worklist",
+                to: "object",
+                uuid : uuid1
+            });
+        },
         /**
          * Event handler for navigating back.
          * Navigate back in the browser history
@@ -124,8 +462,9 @@ sap.ui.define([
          * @private
          */
         _showObject : function (oItem) {
+            var x = oItem.getBindingContext("wip").getPath().substring("/YY1_WIPENTRIES");
             this.getRouter().navTo("object", {
-                objectId: oItem.getBindingContext().getPath().substring("/YY1_WIPENTRIES".length)
+                objectId: x.length
             });
         },
 

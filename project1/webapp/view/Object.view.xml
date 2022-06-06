@@ -1,19 +1,16 @@
 <mvc:View
     controllerName="com.wip2.project1.controller.Object"
-    xmlns="sap.m"
+     xmlns="sap.m" xmlns:f="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:semantic="sap.f.semantic">
 
-    <semantic:SemanticPage
+   <semantic:SemanticPage 
         id="page"
-        headerPinnable="false"
-        toggleHeaderOnTitleClick="false"
-        busy="{objectView>/busy}"
-        busyIndicatorDelay="{objectView>/delay}">
+      >
 
         <semantic:titleHeading>
             <Title
-                text="{TimeEntryID}"
+                text="{wip>/TimeEntryID}"
                 level="H2"/>
         </semantic:titleHeading>
 
@@ -23,12 +20,83 @@
                     path: 'BasePrice',
                     formatter: '.formatter.numberUnit'
                 }"
-                unit="{NetAmount}" />
+                unit="{Units}" />
         </semantic:headerContent>
+          <semantic:content>
+          <Panel >
+          <content>
+        	<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+    	<f:content>
+					<Label text="UUID"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                    <ObjectStatus state="Information" id="UUID" text="{wip>/UUID}"  textDirection="Inherit" visible="true"/>
 
-        <semantic:sendEmailAction>
-            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
-        </semantic:sendEmailAction>
+					
+					<Label text="{i18n>txt_timentry}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="TimeEntryID" text="{wip>/TimeEntryID}"  textDirection="Inherit" visible="true"/>
+					
+					<Label text="{i18n>txt_jid}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="JournalEntryID" text="{wip>/JournalEntryID}"  textDirection="Inherit" visible="true"/>
+					
+					<Label text="{i18n>txt_desc}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="Description" text="{wip>/Description}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_type}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                     <ObjectStatus state="Information" id="Type" text="{wip>/Type}"  textDirection="Inherit" visible="true"/>
+
+                     <Label text="{i18n>txt_tptxt}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                     <ObjectStatus state="Information" id="Type_Text" text="{wip>/Type_Text}"  textDirection="Inherit" visible="true"/>
+
+					<Label text="{i18n>txt_pdate}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="PostingDate" text="{wip>/PostingDate}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_docdate}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="DocumentDate" text="{wip>/DocumentDate}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_qnt}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="Quantity" text="{wip>/Quantity}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_units}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="Units" text="{wip>/Units}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_bprice}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="" text="{}"  textDirection="Inherit" visible="true"/>
+					
+					<Label text="{i18n>txt_netamnt}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="BasePrice" text="{wip>/BasePrice}"  textDirection="Inherit" visible="true"/>
+					
+					<Label text="{i18n>txt_notes}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="Notes" text="{wip>/Notes}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_sapcdatetime}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_CreatedDateTime" text="{wip>/SAP_CreatedDateTime}"  textDirection="Inherit" visible="true"/>
+					
+					<Label text="{i18n>txt_sapcbyuser}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_CreatedByUser" text="{wip>/SAP_CreatedByUser}"  textDirection="Inherit" visible="true"/>
+					
+				
+					
+					<Label text="{i18n>txt_sapcbyusertxt}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_CreatedByUser_Text" text="{wip>/SAP_CreatedByUser_Text}"  textDirection="Inherit" visible="true"/>
+				
+					<Label text="{i18n>txt_saplastchngdtime}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_LastChangedDateTime" text="{wip>/SAP_LastChangedDateTime}"  textDirection="Inherit" visible="true"/>
+
+                     <Label text="{i18n>txt_saplastchngbyuser}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_LastChangedByUser" text="{wip>/SAP_LastChangedByUser}"  textDirection="Inherit" visible="true"/>
+
+                     <Label text="{i18n>txt_saplstchngbyusertxt}"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                     <ObjectStatus state="Information" id="SAP_LastChangedByUser_Text" text="{wip>/SAP_LastChangedByUser_Text}"  textDirection="Inherit" visible="true"/>
+
+                  
+					
+					
+				
+				</f:content>
+      </f:SimpleForm>
+</content>
+</Panel>
+        </semantic:content>
 
     </semantic:SemanticPage>
 
