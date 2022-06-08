@@ -6,10 +6,7 @@ sap.ui.define([
     return BaseController.extend("com.wip2.project1.controller.App", {
 
         onInit : function () {
-            // 456 123 
-            // apply content density mode to root view
-            // Adding comments
-            // suman
+       
             this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
         }
     });

@@ -59,7 +59,7 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
         "dependencies": {
             "minUI5Version": "1.96.8",
             "libs": {
@@ -116,10 +116,17 @@
                     ]
                 },
                 {
-                    "pattern": "YY1_WIPENTRIES/{objectId}",
+                    "pattern": "object/{uuid}",
                     "name": "object",
                     "target": [
                         "object"
+                    ]
+                },
+                {
+                    "pattern": "create/{abc}",
+                    "name": "create",
+                    "target": [
+                        "create"
                     ]
                 }
             ],
@@ -127,13 +134,16 @@
                 "worklist": {
                     "viewName": "Worklist",
                     "viewId": "worklist",
-                    "viewLevel": 1,
                     "title": "{i18n>worklistViewTitle}"
+                },
+                "create": {
+                    "viewName": "CreateEntry",
+                    "viewId": "create"
+             
                 },
                 "object": {
                     "viewName": "Object",
-                    "viewId": "object",
-                    "viewLevel": 2,
+                    "viewId": "object",                    
                     "title": "{i18n>objectViewTitle}"
                 },
                 "objectNotFound": {
@@ -144,6 +154,7 @@
                     "viewName": "NotFound",
                     "viewId": "notFound"
                 }
+               
             }
         },
         "rootView": {

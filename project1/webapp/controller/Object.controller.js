@@ -1,9 +1,12 @@
 sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/History",
-    "../model/formatter"
-], function (BaseController, JSONModel, History, formatter) {
+    "../model/formatter",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator,MessageToast,MessageBox) {
     "use strict";
 
     return BaseController.extend("com.wip2.project1.controller.Object", {
@@ -61,8 +64,27 @@ sap.ui.define([
          * @private
          */
         _onObjectMatched : function (oEvent) {
-            var sObjectId =  oEvent.getParameter("arguments").objectId;
-            this._bindView("/YY1_WIPENTRIES" + sObjectId);
+            debugger;
+            var uuid =  oEvent.getParameter("arguments").uuid;
+            //this._bindView("/YY1_WIPENTRIES" + sObjectId);
+            var omodelwipread = this.getOwnerComponent().getModel();
+            var filters = new Filter("SAP_UUID",FilterOperator.EQ,uuid);
+             omodelwipread.read("/YY1_WIPENTRIES",{
+                 filters : [filters],
+                 success : function(odata){
+                     
+                     var jsonmodel = new JSONModel();
+                     jsonmodel.setData(odata.results[0]);
+                    
+                     this.getView().setModel(jsonmodel,"wip");
+                     
+                     sap.ui.core.BusyIndicator.hide();
+                 }.bind(this),
+                 error : function(msg){
+                     sap.ui.core.BusyIndicator.hide();
+ 
+                 }
+             });
         },
 
         /**
@@ -72,7 +94,7 @@ sap.ui.define([
          * @private
          */
         _bindView : function (sObjectPath) {
-            var oViewModel = this.getModel("objectView");
+            var oViewModel = this.getModel("object");
 
             this.getView().bindElement({
                 path: sObjectPath,
