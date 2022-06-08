@@ -120,7 +120,7 @@ xmlns:customData = "http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomDa
                             <Column>
                                 <Text text="{i18n>txt_notes}"/>
                             </Column>
-                            <Column>
+                            <Column visible="false">
                                 <Text text="SAP"/>
                             </Column>
                             <Column id="idseldel" visible="false">
@@ -281,6 +281,7 @@ xmlns:customData = "http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomDa
                                                 <OverflowToolbar id="_IDGenOverflowToolbar1" design="Transparent">
                                                   
                                                     <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                                                    <Button id="btn_add" icon="sap-icon://add" press="_addrecord" />
                                                     <Button id="_IDGenButton1" icon="sap-icon://sort" press="onSort" class="iconWhite"/>
                                                 
                                             <!-- <Button icon="sap-icon://action-settings" tooltip="Column Settings" press="onColumns" class="iconWhite"/> -->

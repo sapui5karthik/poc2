@@ -58,7 +58,7 @@ sap.ui.define([
         },
           // CUSTOM CODE : Developer: Suman Venkatapuram for Chappota.com
         onBeforeRebindTable: function (oEvent) {
-            debugger;
+            
                 
             // var oBindingParams = oEvent.getParameter("bindingParams");
             // oBindingParams.filters.push(new Filter("TimeEntryID", "EQ", "200"));
@@ -118,7 +118,7 @@ sap.ui.define([
                 //com.chappota.wipprojectsalesreport
                 sap.ui.core.BusyIndicator.show(0);
                 if(!this.cufrag){
-                    this.cufrag = sap.ui.xmlfragment(this.getView().getId(),"com.chappota.wipprojectsalesreport.fragments.Create",this);
+                    this.cufrag = sap.ui.xmlfragment(this.getView().getId(),"com.wip2.project1.fragments.Create",this);
                     this.getView().addDependent(this.cufrag);
                 }
                 
@@ -179,7 +179,7 @@ sap.ui.define([
         _rowedit : function(oevent){
             if(oevent.getParameter("selected")){
                 if(!this.ufrag){
-                    this.ufrag = sap.ui.xmlfragment(this.getView().getId(),"com.chappota.wipprojectsalesreport.fragments.Update",this);
+                    this.ufrag = sap.ui.xmlfragment(this.getView().getId(),"com.wip2.project1.fragments.Update",this);
                     this.getView().addDependent(this.ufrag);
                 }
                 this.ufrag.open();
@@ -399,13 +399,16 @@ _localmethodforsmarttable : function(filters1){
             }
         },
 
-
-
-
-
-
-
-
+        //Smart table add record
+        _addrecord : function(){
+            debugger;
+            this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            this.oRouter.navTo("create",{
+                from : "worklist",
+                to : "create",
+                abc : 10
+            },true);
+        },
 
 
 

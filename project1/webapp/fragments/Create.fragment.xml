@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+   xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+   xmlns:core="sap.ui.core" >
+   <Dialog resizable="true" draggable="true" contentHeight="475px" contentWidth="615px"
+      id="createrecord"
+      title="Create Record">
+      	<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="createform"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+      <!-- <Label required="true" text="UUID"/><Input width="auto"/> -->
+
+      	<Label text="TimeEntryID" required="false"/><Input  id="in_timeentry" width="auto" maxLength="10"/>
+          <Label text="JournalEntryID" required="false"/><Input id="in_jrnlid"  width="auto" maxLength="10" />
+          <Label text="Description" required="false"/><Input id="in_desc" width="auto" maxLength="60" />
+          <Label text="Type" required="false"/><Input  id="in_type" maxLength="2" />
+          <Label text="PostingDate" required="false"/><DatePicker  id="in_pd" displayFormat="MM/dd/yyyy" />
+            <Label text="DocumentDate" required="false"/><DatePicker id="in_dd" displayFormat="MM/dd/yyyy" />
+            <Label text="Quantity" required="false"/><Input  id="in_qlty" width="auto" value="2"/>
+            <Label text="Units" required="false"/><Input  id="in_units" width="auto" maxLength="3"/>
+            <Label text="BasePrice" required="false"/><Input id="in_bp"  width="auto" value="234"/>
+            <Label text="NetAmount" required="false"/><Input  id="in_netamnt" width="auto" value="876"/>
+            <Label text="Notes" required="false"/><Input id="in_notes" width="auto" maxLength="500"/>
+
+
+      </f:SimpleForm>
+      <buttons>
+      <Button text="Save" press="_saverecord" />
+        <Button text="Close" press="_CloseCUFrag" />
+      </buttons>
+   </Dialog>
+</core:FragmentDefinition>
