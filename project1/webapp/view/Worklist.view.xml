@@ -1,87 +1,87 @@
-<mvc:View
-    controllerName="com.wip2.project1.controller.Worklist"
-    xmlns:sf="sap.ui.layout.form" 
-xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" 
+<mvc:View controllerName="com.wip2.project1.controller.Worklist" 
+xmlns:sf="sap.ui.layout.form" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" 
+xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+xmlns:customData = "http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 
-	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
-     <semantic:SemanticPage id="page">
+>
+
+    <semantic:SemanticPage id="page">
 
 
         <semantic:content>
             <Panel headerText="M Table" expandable="true" expanded="false">
                 <content>
                     <!-- <SearchField - Modified by Ramnath
-                                                id="searchField"
-                                                tooltip="{i18n>worklistSearchTooltip}"
-                                                search=".onSearch" width="">
-                                                <layoutData>
-                                                    <OverflowToolbarLayoutData
-                                                        maxWidth="200px"
-                                                        priority="NeverOverflow"/>
-                                </layoutData></SearchField>-->
+                                                                    id="searchField"
+                                                                    tooltip="{i18n>worklistSearchTooltip}"
+                                                                    search=".onSearch" width="">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData
+                                                                            maxWidth="200px"
+                                                                            priority="NeverOverflow"/>
+                                                    </layoutData></SearchField>-->
                     <sf:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form1">
-                                <sf:content>
-                                   
-                                    <VBox>
-                                        <HBox justifyContent="SpaceBetween">
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text="Time Entry :"/><Input id="timeentrysearch" width="auto" placeholder="TimeEntry Search..." submit="_timeentrysearch" />
-                                            </HBox>
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text=" Posting Date:"/><DatePicker id="postdate" width="auto" placeholder="PostingDate Search..." displayFormat="MM/dd/yyyy" change="_postdate"/>
-                                              </HBox>
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text="Description:"/><Input id="descsearch" width="auto" placeholder="Description Search..." submit="_descsearch"/>
-                                              </HBox>
-                                            
-                                        </HBox>
-                                        <HBox justifyContent="SpaceBetween">
-                                          
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text="Jornl. Entry:"/><Input id="jrnlentry" width="auto" placeholder="JournalEntryId Search..." submit="_journalentrysearch"/>
-                                              </HBox>
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text="Document Date:" wrapping="true"/><DatePicker id="docdate" width="auto" placeholder="DocumentDate Search..." displayFormat="MM/dd/yyyy" change="_docdate"/>
-                                              </HBox>
-                                            <HBox alignItems="Center">
-                                            <Label design="Bold" text="Type:"/><Input id="typesearch"  width="auto" placeholder="Type Search..." submit="_typesearch" showValueHelp="true" />
-                                              </HBox>
-                                            
-                                        </HBox>
-                                    </VBox>
-                                </sf:content>
+                        <sf:content>
+
+                            <VBox>
+                                <HBox justifyContent="SpaceBetween">
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text="Time Entry :"/><Input id="timeentrysearch" width="auto" placeholder="TimeEntry Search..." submit="_timeentrysearch"/>
+                                    </HBox>
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text=" Posting Date:"/><DatePicker id="postdate" width="auto" placeholder="PostingDate Search..." displayFormat="MM/dd/yyyy" change="_postdate"/>
+                                    </HBox>
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text="Description:"/><Input id="descsearch" width="auto" placeholder="Description Search..." submit="_descsearch"/>
+                                    </HBox>
+
+                                </HBox>
+                                <HBox justifyContent="SpaceBetween">
+
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text="Jornl. Entry:"/><Input id="jrnlentry" width="auto" placeholder="JournalEntryId Search..." submit="_journalentrysearch"/>
+                                    </HBox>
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text="Document Date:" wrapping="true"/><DatePicker id="docdate" width="auto" placeholder="DocumentDate Search..." displayFormat="MM/dd/yyyy" change="_docdate"/>
+                                    </HBox>
+                                    <HBox alignItems="Center">
+                                        <Label design="Bold" text="Type:"/><Input id="typesearch" width="auto" placeholder="Type Search..." submit="_typesearch" showValueHelp="true"/>
+                                    </HBox>
+
+                                </HBox>
+                            </VBox>
+                        </sf:content>
                     </sf:SimpleForm>
-                    <Table id="table" items="{ path: 'wip>/' }" width="auto"  showSeparators="All" 
-                    growing="true" growingThreshold="20" growingScrollToLoad="false" class="sapUiResponsiveMargin">
+                    <Table id="table" items="{ path: 'wip>/' }" width="auto" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="false" class="sapUiResponsiveMargin">
 
                         <headerToolbar>
                             <OverflowToolbar>
-                            <Button icon="sap-icon://refresh" press="onInit" />
+                                <Button
+                                icon="sap-icon://refresh" press="onInit"/>
                                 <!-- <Title
-                                                            id="tableHeader"
-                                                            text="{worklistView>/worklistTableTitle}"
-                                                            level="H3"/> -->
+                                                                                            id="tableHeader"
+                                                                                            text="{worklistView>/worklistTableTitle}"
+                                                                                            level="H3"/> -->
                                 <ToolbarSpacer/>
-                                 <Button icon="sap-icon://create" press="_createpress" type="Transparent"/>    
-                               <ToggleButton id="idedit" icon="sap-icon://edit" press="_editpress" type="Accept"/>                               
-                                <ToggleButton icon="sap-icon://delete" press="_deletepress" type="Reject"/>
-                                <!-- <Label design="Bold" text="Update" />
-                                	<Switch state="false" customTextOn=" " customTextOff=" ">
-                                            <layoutData>
-                                                <FlexItemData growFactor="1" />
-                                            </layoutData>
-                                      </Switch>
-                                 <Label design="Bold" text="Delete" /> -->
+                                <Button icon="sap-icon://create" press="_createpress" type="Transparent"/>
+                                <ToggleButton id="idedit" icon="sap-icon://edit" press="_editpress" type="Accept"/>
+                                <ToggleButton
+                                icon="sap-icon://delete" press="_deletepress" type="Reject"/>
+                            <!-- <Label design="Bold" text="Update" />
+                                                            	<Switch state="false" customTextOn=" " customTextOff=" ">
+                                                                        <layoutData>
+                                                                            <FlexItemData growFactor="1" />
+                                                                        </layoutData>
+                                                                  </Switch>
+                                                             <Label design="Bold" text="Delete" /> -->
 
                             </OverflowToolbar>
                         </headerToolbar>
 
                         <columns>
-                         <Column id="idseledit" visible="false">
+                            <Column id="idseledit" visible="false">
                                 <Text text="sel"/>
                             </Column>
                             <Column>
@@ -123,33 +123,33 @@ xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semanti
                             <Column>
                                 <Text text="SAP"/>
                             </Column>
-                             <Column id="idseldel" visible="false">
+                            <Column id="idseldel" visible="false">
                                 <Text text="Del"/>
                             </Column>
                             <!-- <Column >
-                                                    <Text text="{i18n>txt_sapcdatetime}" />
-                                                </Column>
-                                                <Column >
-                                                    <Text text="{i18n>txt_sapcbyuser}" />
-                                                </Column>
-                                                 <Column >
-                                                    <Text text="{i18n>txt_sapcbyusertxt}" />
-                                                </Column>
-                                                <Column>
-                                                    <Text text="{i18n>txt_saplastchngdtime}" />
-                                                </Column>
-                                                <Column >
-                                                    <Text text="{i18n>txt_saplastchngbyuser}" />
-                                                </Column>
-                                                 <Column >
-                                                    <Text text="{i18n>txt_saplstchngbyusertxt}" />
-                                                </Column> -->
+                                                                                <Text text="{i18n>txt_sapcdatetime}" />
+                                                                            </Column>
+                                                                            <Column >
+                                                                                <Text text="{i18n>txt_sapcbyuser}" />
+                                                                            </Column>
+                                                                             <Column >
+                                                                                <Text text="{i18n>txt_sapcbyusertxt}" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text text="{i18n>txt_saplastchngdtime}" />
+                                                                            </Column>
+                                                                            <Column >
+                                                                                <Text text="{i18n>txt_saplastchngbyuser}" />
+                                                                            </Column>
+                                                                             <Column >
+                                                                                <Text text="{i18n>txt_saplstchngbyusertxt}" />
+                                                                            </Column> -->
                         </columns>
 
                         <items>
                             <ColumnListItem type="Navigation" press=".onPress">
-                            <cells>
-                                   <RadioButton id="updaterad" select="_rowedit"/>
+                                <cells>
+                                    <RadioButton id="updaterad" select="_rowedit"/>
                                 </cells>
                                 <cells>
                                     <Text text="{wip>TimeEntryID}"/>
@@ -201,7 +201,7 @@ xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semanti
                                     </VBox>
                                 </cells>
                                 <cells>
-                                    <Button press="_deleterecord" icon="sap-icon://delete" type="Reject" />
+                                    <Button press="_deleterecord" icon="sap-icon://delete" type="Reject"/>
                                 </cells>
                             </ColumnListItem>
                         </items>
@@ -209,69 +209,117 @@ xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semanti
                 </content>
             </Panel>
 
-               <Panel headerText="Smart Table" expandable="true" expanded="true">
+            <Panel headerText="Smart Table" expandable="true" expanded="true">
                 <content>
-	<VBox fitContainer="true">
-    
-	<smartFilterBar:SmartFilterBar id="smartFilterBar" 	considerSelectionVariants="true" beforeVariantFetch="onBeforeVariantSave"  afterVariantLoad="onAfterVariantLoad"
-    entitySet="YY1_WIPENTRIES" persistencyKey="SmartFilter_Explored" liveMode="true">
-	<smartFilterBar:controlConfiguration>
-	<smartFilterBar:ControlConfiguration key="TimeEntryID" visibleInAdvancedArea="true" index="0" label="{i18n>txt_timentry}" hasValueHelpDialog="false"/>
-    <smartFilterBar:ControlConfiguration key="PostingDate" visibleInAdvancedArea="true" index="1" label="{i18n>txt_pdate}" hasValueHelpDialog="false">
-    <smartFilterBar:customControl>
-        <DatePicker />
-    </smartFilterBar:customControl>
-    </smartFilterBar:ControlConfiguration>
-    <smartFilterBar:ControlConfiguration key="Description" visibleInAdvancedArea="true" index="2" label="{i18n>txt_desc}" hasValueHelpDialog="false"/>
-    <smartFilterBar:ControlConfiguration key="JournalEntryID" visibleInAdvancedArea="true" index="3" label="{i18n>txt_jid}" hasValueHelpDialog="false"/>
-    <smartFilterBar:ControlConfiguration key="DocumentDate" visibleInAdvancedArea="true" index="4" label="{i18n>txt_docdate}" hasValueHelpDialog="false">
- <smartFilterBar:customControl>
-        <DatePicker />
-    </smartFilterBar:customControl>
-    </smartFilterBar:ControlConfiguration>
-    <smartFilterBar:ControlConfiguration key="Type" visibleInAdvancedArea="true" index="5" label="{i18n>txt_type}" hasValueHelpDialog="true"/>
-					
-						
-				</smartFilterBar:controlConfiguration>
-                	<smartFilterBar:layoutData>
-				<FlexItemData shrinkFactor="0"/>
-			</smartFilterBar:layoutData>
-	</smartFilterBar:SmartFilterBar>
-    
-<smartTable:SmartTable id="smartTable" entitySet="YY1_WIPENTRIES" smartFilterId="smartFilterBar" tableType="Table" beforeRebindTable="onBeforeRebindTable" 
- useExportToExcel="true" useVariantManagement="true" useTablePersonalisation="true" header="WIP Entries" showRowCount="true" enableAutoBinding="true" 
- enableAutoColumnWidth="true" initiallyVisibleFields="TimeEntryID,JournalEntryID,Description,Type,PostingDate,DocumentDate,Quantity,Units,BasePrice,NetAmount,Notes"
- ignoreFromPersonalisation="SAP_CreatedByUser,SAP_CreatedByUser_Text,SAP_LastChangedDateTime,SAP_LastChangedByUser,SAP_LastChangedByUser_Text"
- 
- >
+                    <VBox fitContainer="true">
 
-            <!-- initiallyVisibleFields="TimeEntryID,JournalEntryID,Description,Type,PostingDate,DocumentDate,Quantity,Units,BasePrice,NetAmount,Notes" -->
-			<smartTable:layoutData>
-				<FlexItemData growFactor="1" baseSize="0%"/>
-			</smartTable:layoutData>
-            <Table>
-                <columns>
-                    <Column >
-                        <customData>
-                        <core:CustomData key="p13nData"
-                                                    value='\{"columnKey": "TimeEntryID", "leadingProperty": "TimeEntryID","displayBehaviour": "descriptionOnly", "width": "360px", "index" : "6"}' />
-                                </customData>
-                        <Text text="TimeEntry" />
-                    </Column>
-                </columns>
-            <items>
-            <ColumnListItem type="Navigation" press=".onPresssmarttable">
-            <cells>
-                <Link text="{TimeEntryID}" />
-            </cells>
-            </ColumnListItem>
-            </items>
-            </Table>
-		</smartTable:SmartTable>
-    </VBox>
-                
+                        <smartFilterBar:SmartFilterBar id="smartFilterBar" considerSelectionVariants="true" beforeVariantFetch="onBeforeVariantSave" afterVariantLoad="onAfterVariantLoad" entitySet="YY1_WIPENTRIES" persistencyKey="SmartFilter_Explored" liveMode="true">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration key="TimeEntryID" visibleInAdvancedArea="true" index="0" label="{i18n>txt_timentry}" hasValueHelpDialog="true"/>
+                                <smartFilterBar:ControlConfiguration key="PostingDate" visibleInAdvancedArea="true" index="1" label="{i18n>txt_pdate}" hasValueHelpDialog="false">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration key="Description" visibleInAdvancedArea="true" index="2" label="{i18n>txt_desc}" hasValueHelpDialog="false"/>
+                                <smartFilterBar:ControlConfiguration key="JournalEntryID" visibleInAdvancedArea="true" index="3" label="{i18n>txt_jid}" hasValueHelpDialog="false"/>
+                                <smartFilterBar:ControlConfiguration key="DocumentDate" visibleInAdvancedArea="true" index="4" label="{i18n>txt_docdate}" hasValueHelpDialog="false">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration key="Type" visibleInAdvancedArea="true" index="5" label="{i18n>txt_type}" hasValueHelpDialog="true"/>
+
+
+                            </smartFilterBar:controlConfiguration>
+                            <smartFilterBar:layoutData>
+                                <FlexItemData shrinkFactor="0"/>
+                            </smartFilterBar:layoutData>
+                        </smartFilterBar:SmartFilterBar>
+	<IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter id="allitfilter"
+				showAll="true"
+				count="{}"
+				text="BasePrice"
+				key="All" />
+			<IconTabSeparator />
+            <!-- count="{/ProductCollectionStats/Counts/Weight/Ok}" -->
+			<IconTabFilter
+				icon="sap-icon://begin"
+				iconColor="Positive"
+				count="{}"
+				text="Below 500"
+				key="b500" />
+			<IconTabFilter
+				icon="sap-icon://compare"
+				iconColor="Critical"
+				count="{}"
+				text="Above 500"
+				key="a500" />
+			<!-- <IconTabFilter
+				icon="sap-icon://inventory"
+				iconColor="Negative"
+				count="{/ProductCollectionStats/Counts/Weight/Overweight}"
+				text="Overweight"
+				key="Overweight" /> -->
+		</items>
+		<content>
+                        <smartTable:SmartTable
+                            id="smartTable" entitySet="YY1_WIPENTRIES" smartFilterId="smartFilterBar" tableType="ResponsiveTable" beforeRebindTable="onBeforeRebindTable" 
+                            useExportToExcel="true" useVariantManagement="true" useTablePersonalisation="true" header="WIP Entries" showRowCount="true" 
+                            enableAutoBinding="true" enableAutoColumnWidth="false" editTogglable="false" 
+                                        customData:useSmartToggle="true" placeToolbarInTable="true"
+                            initiallyVisibleFields="TimeEntryID,JournalEntryID,Description,Type,PostingDate,DocumentDate,Quantity,Units,BasePrice,NetAmount" 
+                            ignoreFromPersonalisation="SAP_CreatedByUser,SAP_CreatedByUser_Text,SAP_LastChangedDateTime,SAP_LastChangedByUser,SAP_LastChangedByUser_Text,Notes">
+
+                            <!-- initiallyVisibleFields="TimeEntryID,JournalEntryID,Description,Type,PostingDate,DocumentDate,Quantity,Units,BasePrice,NetAmount,Notes" -->
+                            <smartTable:customToolbar>
+                                                <OverflowToolbar id="_IDGenOverflowToolbar1" design="Transparent">
+                                                  
+                                                    <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                                                    <Button id="_IDGenButton1" icon="sap-icon://sort" press="onSort" class="iconWhite"/>
+                                                
+                                            <!-- <Button icon="sap-icon://action-settings" tooltip="Column Settings" press="onColumns" class="iconWhite"/> -->
+                                                </OverflowToolbar>
+                                            </smartTable:customToolbar>
+                            <Table id="innertable" sticky="ColumnHeaders,HeaderToolbar" 
+                            growing="true" growingThreshold="50" growingScrollToLoad="true">
+                                <columns>
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" 
+                                            value='\{
+                                            "sortProperty":"TimeEntryID",
+                                            "columnKey": "TimeEntryID", 
+                                            "leadingProperty": "TimeEntryID","displayBehaviour":
+                                             "descriptionOnly", "width": "360px", 
+                                             "columnIndex" : "0"}'
+                                             
+                                             
+                                             />
+                                        </customData>
+                                        <Text text="TimeEntry"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press=".onPresssmarttable">
+                                        <cells>
+                                            <Link text="{TimeEntryID}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </smartTable:SmartTable>
+                        </content>
+	</IconTabBar>
+                    </VBox>
+
                 </content>
-                </Panel>
+            </Panel>
 
         </semantic:content>
 

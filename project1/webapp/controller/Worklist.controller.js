@@ -58,7 +58,16 @@ sap.ui.define([
         },
           // CUSTOM CODE : Developer: Suman Venkatapuram for Chappota.com
         onBeforeRebindTable: function (oEvent) {
+            debugger;
+                
+            // var oBindingParams = oEvent.getParameter("bindingParams");
+            // oBindingParams.filters.push(new Filter("TimeEntryID", "EQ", "200"));
+            // oBindingParams.parameters.select = oBindingParams.parameters.select + ",TimeEntryID";
+
 			// var mBindingParams = oEvent.getParameter("bindingParams");
+            // var filters1 = new Filter("BasePrice",FilterOperator.LE,"500");
+            // mBindingParams.filters.push(filters1);
+
 			// var oMultiComboBox = this.getView().byId("multiComboBox");
 			// var aCountKeys = oMultiComboBox.getSelectedKeys();
 			// for (var i = 0; i < aCountKeys.length; i++) {
@@ -311,6 +320,7 @@ sap.ui.define([
                 }
             });
         },
+
         _timeentrysearch : function(oevent){
             var filters = new Filter("TimeEntryID",FilterOperator.EQ,oevent.getParameter("value"));
             this._localmethodforfilters(filters);
@@ -336,6 +346,69 @@ sap.ui.define([
             var filters = new Filter("Type",FilterOperator.EQ,oevent.getParameter("value"));
             this._localmethodforfilters(filters);
         },
+
+
+        // SMART TABLE : Related
+
+_localmethodforsmarttable : function(filters1){
+            debugger;
+            var xFilter = [];		
+            xFilter.push(filters1);
+
+			var finalfilter = new Filter({
+				filters: xFilter,
+				
+			});
+			var binding = this.getView().byId("innertable").getBinding("items");
+			binding.filter(finalfilter);
+            // var count = binding.aLastContexts.length;
+            // var count1 = {
+            //     "cnt" : count
+            // };
+            // var countjson = new JSONModel();
+            // countjson.setData(count1);
+            // this.getView().setModel(countjson,"c1");
+        },
+        onFilterSelect : function(oevent){
+           
+            var sKey = oevent.getParameter("key");
+            if(sKey === "b500"){
+                var filters = new Filter("BasePrice",FilterOperator.LE,"500");
+                this._localmethodforsmarttable(filters);
+                   }
+                   else
+            if(sKey === "a500"){
+                var filters = new Filter("BasePrice",FilterOperator.GE,"500");
+                this._localmethodforsmarttable(filters);
+            }
+            else
+            if(sKey === "All"){
+                var filters = [];
+                var binding = this.getView().byId("innertable").getBinding("items");
+                binding.filter(filters);
+            }    
+            
+            
+
+
+        },
+        onSort: function () {
+            var oSmartTable = this.getView().byId("smartTable");
+            if (oSmartTable) {
+                oSmartTable.openPersonalisationDialog("Sort");
+            }
+        },
+
+
+
+
+
+
+
+
+
+
+
         /**
          * Called when the worklist controller is instantiated.
          * @public
