@@ -1,7 +1,12 @@
 sap.ui.define([
     "./BaseController",
+    "sap/ui/model/json/JSONModel",
     "../model/formatter",
-], function (BaseController,formatter) {
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], function (BaseController,JSONModel,formatter,Filter,FilterOperator,MessageToast,MessageBox,) {
     "use strict";
 	return BaseController.extend("com.wip2.project1.controller.CreateEntry", {
 		formatter : formatter,
@@ -35,7 +40,7 @@ sap.ui.define([
                  success : function(odata){
                      sap.ui.core.BusyIndicator.hide();
                      debugger;
-                      this.cufrag.close();
+                      this._toWorklist();
              MessageToast.show("Record Created");
              this.onInit();
                  }.bind(this),
