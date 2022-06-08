@@ -35,7 +35,7 @@ sap.ui.define([
                  success : function(odata){
                      sap.ui.core.BusyIndicator.hide();
                      debugger;
-                      this.cufrag.close();
+                      this._toWorklist();
              MessageToast.show("Record Created");
              this.onInit();
                  }.bind(this),
