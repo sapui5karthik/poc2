@@ -401,12 +401,12 @@ _localmethodforsmarttable : function(filters1){
 
         //Smart table add record
         _addrecord : function(){
-            debugger;
+          
             this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             this.oRouter.navTo("create",{
                 from : "worklist",
                 to : "create",
-                abc : 10
+                uuid : 10
             },true);
         },
 
@@ -482,9 +482,9 @@ _localmethodforsmarttable : function(filters1){
            // this._showObject(oEvent.getSource());
             var uuid1 = oEvent.getSource().getBindingContext().getProperty("SAP_UUID");
       
-            this.getRouter().navTo("object", {
+            this.getRouter().navTo("create", {
                 from: "worklist",
-                to: "object",
+                to: "create",
                 uuid : uuid1
             });
         },

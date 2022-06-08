@@ -14,7 +14,9 @@ sap.ui.define([
 		/* lifecycle methods                                           */
 		/* =========================================================== */
 		onInit: function() {
-            debugger;
+           
+            this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            this.oRouter.getRoute("create").attachPatternMatched(this._updateentries,this);
         },
         _toWorklist : function(){
             this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -35,20 +37,67 @@ sap.ui.define([
                  "NetAmount" : this.byId("in_netamnt").getValue(),
                  "Notes" : this.byId("in_notes").getValue(),
              };
-             var omodelcreate = this.getOwnerComponent().getModel();
-             omodelcreate.create("/YY1_WIPENTRIES",payload,{
+             var omodelcreateupdate = this.getOwnerComponent().getModel();
+             if(this.flag){
+            
+                omodelcreateupdate.create("/YY1_WIPENTRIES",payload,{
                  success : function(odata){
                      sap.ui.core.BusyIndicator.hide();
-                     debugger;
+                     
                       this._toWorklist();
              MessageToast.show("Record Created");
              this.onInit();
                  }.bind(this),
                  error : function(msg){
-                     debugger;
+                   
                      sap.ui.core.BusyIndicator.hide();
                  }
              });
+            }
+            else if(!this.flag){
+                var eset = "/YY1_WIPENTRIES(guid'"+this.sapuuid+"')";
+                omodelcreateupdate.update(eset,payload,{
+                    success : function(odata){
+                        this._toWorklist();
+                        sap.ui.core.BusyIndicator.hide();
+                       
+                MessageToast.show("Record updated");
+                this.onInit();
+                    }.bind(this),
+                    error : function(msg){
+                        debugger;
+                        sap.ui.core.BusyIndicator.hide();
+                    }
+                });
+            }
+         },
+         _updateentries : function(oevent){
+             
+             var uuid = oevent.getParameter("arguments").uuid;
+             this.sapuuid = uuid;
+             this.flag;
+             if(uuid === "10"){
+                 debugger;
+                 this.flag= true;
+             }
+             else 
+             if(uuid !== "10"){
+                 this.flag=false;
+                var model = this.getOwnerComponent().getModel();
+                var filteruuid = new Filter("SAP_UUID",FilterOperator.EQ,uuid);
+                model.read("/YY1_WIPENTRIES",{
+                    filters : [filteruuid],
+                    success : function(odata){
+                        var muuid = new JSONModel();
+                        muuid.setData(odata.results[0]);
+                        this.getView().setModel(muuid,"upd");
+                    }.bind(this),
+                    error : function(msg){
+                        MessageToast.show("Failed");
+                    }.bind(this)
+                });
+             }
+
          },
 
 	});
