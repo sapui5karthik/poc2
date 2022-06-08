@@ -6,28 +6,28 @@
    >
 	<App>
 		<pages>
-			<Page title="CreateRecord" navButtonPress="_toWorklist" showNavButton="true">
+			<Page title="Create/Update" navButtonPress="_toWorklist" showNavButton="true">
 				<content>
                 	<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="createform"
 				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
       <!-- <Label required="true" text="UUID"/><Input width="auto"/> -->
 
-      	<Label text="TimeEntryID" required="false"/><Input  id="in_timeentry" width="auto" maxLength="10"/>
-          <Label text="JournalEntryID" required="false"/><Input id="in_jrnlid"  width="auto" maxLength="10" />
-          <Label text="Description" required="false"/><Input id="in_desc" width="auto" maxLength="60" />
-          <Label text="Type" required="false"/><Input  id="in_type" maxLength="2" />
+        	<Label text="TimeEntryID" required="false"/><Input  value="{upd>/TimeEntryID}" id="in_timeentry" width="auto" maxLength="10"/>
+          <Label text="JournalEntryID" required="false"/><Input value="{upd>/JournalEntryID}" id="in_jrnlid"  width="auto" maxLength="10" />
+          <Label text="Description" required="false"/><Input value="{upd>/Description}" id="in_desc" width="auto" maxLength="60" />
+          <Label text="Type" required="false"/><Input value="{upd>/Type}" id="in_type" maxLength="2" />
           <Label text="PostingDate" required="false"/><DatePicker  id="in_pd" displayFormat="MM/dd/yyyy" />
             <Label text="DocumentDate" required="false"/><DatePicker id="in_dd" displayFormat="MM/dd/yyyy" />
-            <Label text="Quantity" required="false"/><Input  id="in_qlty" width="auto" value="2"/>
-            <Label text="Units" required="false"/><Input  id="in_units" width="auto" maxLength="3"/>
-            <Label text="BasePrice" required="false"/><Input id="in_bp"  width="auto" value="234"/>
-            <Label text="NetAmount" required="false"/><Input  id="in_netamnt" width="auto" value="876"/>
-            <Label text="Notes" required="false"/><Input id="in_notes" width="auto" maxLength="500"/>
+            <Label text="Quantity" required="false"/><Input  value="{upd>/Quantity}" id="in_qlty" width="auto" />
+            <Label text="Units" required="false"/><Input  value="{upd>/Units}" id="in_units" width="auto" maxLength="3"/>
+            <Label text="BasePrice" required="false"/><Input id="in_bp"  width="auto" value="{upd>/BasePrice}"/>
+            <Label text="NetAmount" required="false"/><Input  id="in_netamnt" width="auto" value="{upd>/NetAmount}"/>
+            <Label text="Notes" required="false"/><Input id="in_notes" value="{upd>/Notes}" width="auto" maxLength="500"/>
 
 
       </f:SimpleForm>
        <Button text="Save" press="_saverecord" />
-        <Button text="Cancel" press="_CloseCUFrag" />
+        <Button text="Cancel" press="_toWorklist" />
         </content>
 			</Page>
 		</pages>
