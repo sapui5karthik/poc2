@@ -79,10 +79,22 @@ sap.ui.define([
              if(uuid === "10"){
                  debugger;
                  this.flag= true;
+                 this.byId("btn_save").setVisible(true);
+                 this.byId("btn_edt").setVisible(false);
+                 this.byId("btn_del").setVisible(false);
+                 if(this.getModel("upd")!== undefined){
+                    this.getModel("upd").setData(null);
+                    this.getModel("upd").updateBindings(true)
+                 }
+
+                 //this.byId("").setVisible(false);
              }
              else 
              if(uuid !== "10"){
                  this.flag=false;
+                 this.byId("btn_save").setVisible(false);
+                 this.byId("btn_edt").setVisible(true);
+                 this.byId("btn_del").setVisible(true);
                 var model = this.getOwnerComponent().getModel();
                 var filteruuid = new Filter("SAP_UUID",FilterOperator.EQ,uuid);
                 model.read("/YY1_WIPENTRIES",{
@@ -99,6 +111,70 @@ sap.ui.define([
              }
 
          },
+         
+        _updaterecord : function(){
+           
+            sap.ui.core.BusyIndicator.show(0);
+            var SAP_UUID = this.sapuuid;
+             var payload = {
+                 
+                 "TimeEntryID" : this.byId("in_timeentry").getValue(),
+                 "JournalEntryID" : this.byId("in_jrnlid").getValue(),
+                 "Description" : this.byId("in_desc").getValue(),
+                 "Type" : this.byId("in_type").getValue(),
+                 "PostingDate" : this.formatter.dateTimebackendwithtime(this.byId("in_pd").getValue()),
+                 "DocumentDate" :  this.formatter.dateTimebackendwithtime(this.byId("in_dd").getValue()),
+                 "Quantity" : this.byId("in_qlty").getValue(),
+                 "Units" : this.byId("in_units").getValue(),
+                 "BasePrice" : this.byId("in_bp").getValue(),
+                 "NetAmount" : this.byId("in_netamnt").getValue(),
+                 "Notes" : this.byId("in_notes").getValue(),
+             };
+            var omodelupdate = this.getOwnerComponent().getModel();
+            var eset = "/YY1_WIPENTRIES(guid'"+SAP_UUID+"')";
+            omodelupdate.update(eset,payload,{
+                success : function(odata){
+                    sap.ui.core.BusyIndicator.hide();
+                    debugger;
+                    this._toWorklist();
+                   // this.ufrag.close();
+            MessageToast.show("Record updated");
+            this.onInit();
+                }.bind(this),
+                error : function(msg){
+                    debugger;
+                    sap.ui.core.BusyIndicator.hide();
+                }
+            });
+ 
+         },
+         _deleterecord : function(oevent){
+            var SAP_UUID = this.sapuuid;
+			
+            sap.m.MessageBox.confirm("Please confirm to delete the draft. Once deleted, it cannot be retrieved.", {
+                    
+                        onClose: function(oAction) {
+                        if(oAction === MessageBox.Action.OK){
+            var data_del = this.getOwnerComponent().getModel();
+           
+                var eset = "/YY1_WIPENTRIES(guid'" + SAP_UUID + "')";
+                data_del.remove(eset, null,
+                function() {
+                    debugger;
+                    //this.onInit();
+                    this._toWorklist();
+                	MessageToast.show("Delete success");
+                }.bind(this),
+                function() {
+                    debugger;
+                	MessageToast.show("Delete failed");
+                }
+
+            );
+                        }
+                        }.bind(this)
+                    });
+        },
 
 	});
 

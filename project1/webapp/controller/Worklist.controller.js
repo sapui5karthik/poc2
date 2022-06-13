@@ -47,6 +47,7 @@ sap.ui.define([
                     jsonmodel.setData(odata.results);
                    
                     this.getView().byId("table").setModel(jsonmodel,"wip");
+                    this.getView().byId("innertable").setModel(jsonmodel,"wip1");
                     
                     sap.ui.core.BusyIndicator.hide();
                 }.bind(this),
@@ -56,6 +57,7 @@ sap.ui.define([
                 }
             });
         },
+      
           // CUSTOM CODE : Developer: Suman Venkatapuram for Chappota.com
         onBeforeRebindTable: function (oEvent) {
             
@@ -159,12 +161,15 @@ sap.ui.define([
         _editpress : function(oevent){
             
             var radiosel = this.byId("updaterad");
+            var radiosel = this.byId("updaterad1");
             let state = oevent.getParameter("pressed");
             if(state){
                 this.byId("idseledit").setVisible(true);
+                this.byId("idseledit1").setVisible(true);
             }
             if(!state){
                 this.byId("idseledit").setVisible(false);
+                this.byId("idseledit1").setVisible(false);
             }
         },
         _deletepress : function(oevent){
