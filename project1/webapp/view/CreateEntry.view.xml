@@ -26,8 +26,18 @@
 
 
       </f:SimpleForm>
-       <Button text="Save" press="_saverecord" />
-        <Button text="Cancel" press="_toWorklist" />
+      <Toolbar >
+      <ToolbarSpacer />
+<Button text="Save" press="_saverecord" id="btn_save"/>
+        
+
+         <Button text="Edit" press="_updaterecord" id="btn_edt" />
+          <Button text="Delete" press="_deleterecord" id="btn_del" />
+          <Button text="Back" press="_toWorklist" />
+      <ToolbarSpacer />
+      </Toolbar>
+       
+
         </content>
 			</Page>
 		</pages>
