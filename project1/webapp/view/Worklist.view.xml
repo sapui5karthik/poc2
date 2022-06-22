@@ -11,7 +11,7 @@ xmlns:variant="sap.ui.comp.variants"
 
 
         <semantic:content>
-            <Panel headerText="M Table" expandable="true" expanded="false">
+            <Panel headerText="M Table" expandable="true" expanded="true">
                 <content>
                     <!-- <SearchField - Modified by Ramnath
                                                                     id="searchField"
@@ -54,19 +54,14 @@ xmlns:variant="sap.ui.comp.variants"
                             </VBox>
                         </sf:content>
                     </sf:SimpleForm>
-                    <Table id="table" items="{ path: 'wip>/' }" width="auto" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="false" class="sapUiResponsiveMargin">
+                    <Table id="table" items="{ path: 'wip>/' }" width="auto" showSeparators="All" mode="Delete" delete="_remove"
+                    growing="true" growingThreshold="5" growingScrollToLoad="false" 
+                    class="sapUiResponsiveMargin">
 
                         <headerToolbar>
                             <OverflowToolbar>
-                            <!-- <variant:VariantManagement 
-                            variantItems="{/VariantList}" 
-                            select="onSelect" 
-                            save="onSaveAs" enabled="true" manage="onManage" 
-                            showExecuteOnSelection="false" showShare="false" id="Variants">
-                            <variant:variantItems>
-                                <variant:VariantItem text="{Name}" key="{Key}"/>
-                            </variant:variantItems>
-				        </variant:VariantManagement> -->
+                           
+                        
                                 <Button
                                 icon="sap-icon://refresh" press="onInit"/>
                                 <!-- <Title
@@ -74,6 +69,7 @@ xmlns:variant="sap.ui.comp.variants"
                                                                                             text="{worklistView>/worklistTableTitle}"
                                                                                             level="H3"/> -->
                                 <ToolbarSpacer/>
+                                 <Button text="Add Row" press="_addrow" type="Transparent"/>
                                 <Button icon="sap-icon://create" press="_createpress" type="Transparent"/>
                                 <ToggleButton id="idedit" icon="sap-icon://edit" press="_editpress" type="Accept"/>
                                 <ToggleButton
