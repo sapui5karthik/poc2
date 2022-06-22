@@ -5,8 +5,9 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], function (BaseController, JSONModel, formatter, Filter, FilterOperator,MessageToast,MessageBox) {
+    "sap/m/MessageBox",
+    'sap/base/util/deepExtend'
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator,MessageToast,MessageBox,deepExtend) {
     "use strict";
 
     return BaseController.extend("com.wip2.project1.controller.Worklist", {
@@ -16,7 +17,12 @@ sap.ui.define([
         /* =========================================================== */
         /* lifecycle methods                                           */
         /* =========================================================== */
+       
         onInit : function(){
+          
+
+           
+                        
             if(this.byId("timeentrysearch").getValue() !== ""){
                 this.byId("timeentrysearch").setValue();
             }
@@ -56,6 +62,40 @@ sap.ui.define([
 
                 }
             });
+
+            
+        },
+        _addrow : function(){
+            debugger;
+           this.columnListItemNewLine = new sap.m.ColumnListItem({
+			
+                    cells: [
+                        new sap.m.RadioButton({visible:false}),
+                        new sap.m.Input({ type: "Text", value: "TimeEntryID",width:"auto"}),
+                        new sap.m.Input({ type: "Text", value: "JournalEntryID",width:"auto"}),
+                        new sap.m.Input({ type: "Text", value: "Description",width:"auto"}),
+                        new sap.m.Input({ value: "Type",width:"auto"}),
+                        new sap.m.Input({ value: "Type Text",width:"auto"}),
+                        new sap.m.DatePicker({ value: "Posting Date",width:"auto"}),
+                        new sap.m.DatePicker({ value: "Document Date",width:"auto"}),
+                        new sap.m.Input({ value: "Quantity",width:"auto"}),
+                        new sap.m.Input({ value: "Units",width:"auto"}),
+                        new sap.m.Input({ value: "BasePrice",width:"auto"}),
+                        new sap.m.Input({ value: "Net Amount",width:"auto"}),
+                        new sap.m.Input({ value: "Notes",width:"auto"})
+
+                        ]
+			});
+            this._oTable = this.byId("table");
+     
+            this._oTable.addItem(this.columnListItemNewLine);
+
+        },
+        _remove : function(){
+            
+        this._oTable.removeItem(this.columnListItemNewLine);
+        this.onInit();
+
         },
       
           // CUSTOM CODE : Developer: Suman Venkatapuram for Chappota.com

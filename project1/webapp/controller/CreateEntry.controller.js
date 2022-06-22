@@ -42,6 +42,7 @@ sap.ui.define([
             
                 omodelcreateupdate.create("/YY1_WIPENTRIES",payload,{
                  success : function(odata){
+                     
                      sap.ui.core.BusyIndicator.hide();
                      
                       this._toWorklist();
@@ -99,14 +100,16 @@ sap.ui.define([
                 var filteruuid = new Filter("SAP_UUID",FilterOperator.EQ,uuid);
                 model.read("/YY1_WIPENTRIES",{
                     filters : [filteruuid],
-                    success : function(odata){
+                    async: false,
+                    success : (odata) => {
+                        debugger;
                         var muuid = new JSONModel();
                         muuid.setData(odata.results[0]);
                         this.getView().setModel(muuid,"upd");
-                    }.bind(this),
-                    error : function(msg){
-                        MessageToast.show("Failed");
-                    }.bind(this)
+                    },
+                    error: (oError) => { // oDialog.close();
+                        sap.ui.core.BusyIndicator.hide();
+                    }
                 });
              }
 
